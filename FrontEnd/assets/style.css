@@ -231,11 +231,6 @@ li:hover {
 	grid-row-gap: 20px;
 }
 
-.highlights{
-	background-color: #1D6154;
-	color: white;
-}
-
 .gallery img {
 	width: 100%;
 
@@ -248,7 +243,7 @@ li:hover {
 	margin-bottom: 30px;
 }
 
-.filters input {
+.filters .filter, .filters .tous {
 	margin-left: 5px;
 	margin-right: 5px;
 	font-family: 'Syne';
@@ -262,6 +257,11 @@ li:hover {
 	border: solid 1px #1D6154;
 	border-radius: 18px;
 	transition: 0.2s;
+}
+
+.filters .highlights{
+	background-color: #1D6154;
+	color: white;
 }
 
 .filters input:hover{
