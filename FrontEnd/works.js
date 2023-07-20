@@ -7,8 +7,8 @@ const projets = await reponse.json();
 //on récupère le parent dans le DOM
 const sectionGallery = document.querySelector(".gallery");
 
-//on génère les filtres
-function genererFiltrers() {
+//on génère les filters
+function genererfilterrs() {
     const filtersList = document.createElement("div");
     filtersList.className = "filters";
     const filterTous = document.createElement("input");
@@ -34,12 +34,12 @@ function genererFiltrers() {
     filtersList.appendChild(filterHotels);
 };
 
-genererFiltrers();
+genererfilterrs();
 
+//Création du parent pour la liste de projets dans la gallerie
 const projetsList = document.createElement("div");
 projetsList.className = "projets-liste";
 sectionGallery.appendChild(projetsList)
-
 
 //On parcoure les projets pour les afficher
 function genererProjets(projets) {
@@ -63,50 +63,36 @@ function genererProjets(projets) {
 //Premier affichage de la page
 genererProjets(projets);
 
-
-//boutons filtre
-
-
-const filtersTest = document.querySelectorAll(".filter");
-
-/*
-listHighlights.map((highlight) => {
-    highlight.classList.remove(".highlights")
-})*/
+//boutons filter
+const allFilters = document.querySelectorAll(".filter");
 
 function resetFilters() {
     const listHighlights = document.querySelectorAll(".highlights")
-    //lancement de la boucle sur la liste highlights sur chaque élément nommé highlight
     for (const highlight of listHighlights) {
-
+        //on retire la class highlights de la list des classe de l'objet en question
         highlight.classList.remove("highlights");
     }
-
-
-
 };
 
 const boutonTous = document.querySelector(".tous");
 boutonTous.addEventListener("click", function () {
     projetsList.innerHTML = "";
     resetFilters();
+    //on ajoute la class highlight à l'objet en question
     boutonTous.classList.add("highlights")
     genererProjets(projets);
 });
 
-for (let i = 0; i < filtersTest.length; i++) {
-    const filtre = filtersTest[i];
-    filtre.addEventListener("click", function () {
-        const projetsFiltres = projets.filter(function (projets) {
-            return projets.category.name === filtre.value;
+for (let i = 0; i < allFilters.length; i++) {
+    const filter = allFilters[i];
+    filter.addEventListener("click", function () {
+        const filteredProjets = projets.filter(function (projets) {
+            return projets.category.name === filter.value;
         });
 
         resetFilters();
-
-
-        filtre.classList.add("highlights");
-
+        filter.classList.add("highlights");
         projetsList.innerHTML = " ";
-        genererProjets(projetsFiltres);
+        genererProjets(filteredProjets);
     });
 };
