@@ -11,12 +11,12 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-    <link rel="stylesheet" href="./assets/style-login.css">
+	<link rel="stylesheet" href="./assets/style-login.css">
 </head>
 
 <body>
-    <header>
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<header>
+		<a href="./index.html"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
 		<nav>
 			<ul>
 				<li>projets</li>
@@ -27,31 +27,34 @@
 		</nav>
 	</header>
 
-    <main>
+	<main>
 
-        <h2>Log in</h2>
-        <form action="get" action="#" class="login-form">
-            <div class= "sub-form">
-            <label for="email" class="input-email-label">E-mail</label>
-            <input type="text" name="email" class="input-email">
-            </div>
-            <div class= "sub-form">
-            <label for="password" class="input-password-label">Mot de passe</label>
-            <input type="text" name="password" class="input-password">
-        </div>
-            <button class="bouton-login">Se connecter</button>
-        </form>
-        <a href="#" class="oubli">Mot de passe oublié</a>
+		<h2>Log in</h2>
+		<div class="error-message">
+		</div>
+		<form class="login-form">
+			<div class="sub-form">
+				<label for="input-email" class="input-email-label">E-mail</label>
+				<input type="email" name="input-email" id="input-email">
+			</div>
+			<div class="sub-form">
+				<label for="input-password" class="input-password-label">Mot de passe</label>
+				<input type="password" name="input-password" id="input-password">
+			</div>
+			<button class="bouton-login">Se connecter</button>
+		</form>
+		<a href="#" class="oubli">Mot de passe oublié</a>
 
-    </main>
+	</main>
 
-    <footer>
+	<footer>
 		<nav>
 			<ul>
 				<li>Mentions Légales</li>
 			</ul>
 		</nav>
 	</footer>
+	<script type="module" src="login.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,7 @@
+a{
+    text-decoration: none;
+}
+
 .active {
     font-weight: 600;
 }
@@ -8,6 +12,12 @@ main {
 
 h2 {
     margin-bottom: 40px;
+}
+
+.error-message{
+    color: #B1663C;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 form {
@@ -55,6 +65,7 @@ button {
 
 .oubli {
     color: #3D3D3D;
+    text-decoration: underline;
 }
 
 footer {
