@@ -43,8 +43,8 @@ sectionGallery.appendChild(projetsList)
 function genererProjets(projets) {
     for (let i = 0; i < projets.length; i++) {
         const projet = projets[i];
-        //on crée les futurs éléments du dom ainsi que leur contenu
 
+        //on crée les futurs éléments du dom ainsi que leur contenu
         const projetElement = document.createElement("figure");
         const imageElement = document.createElement("img");
         imageElement.src = projet.imageUrl;
@@ -63,7 +63,7 @@ genererProjets(projets);
 
 //boutons filter
 const allFilters = document.querySelectorAll(".filter");
-
+//fonction pour enlever la class highlight pour par la suite la mettre sur le filtre sélectionné
 function resetFilters() {
     const listHighlights = document.querySelectorAll(".highlights")
     for (const highlight of listHighlights) {
@@ -72,6 +72,7 @@ function resetFilters() {
     }
 };
 
+//fonction du bouton filtre tous
 const boutonTous = document.querySelector(".tous");
 boutonTous.addEventListener("click", function () {
     projetsList.innerHTML = "";
@@ -81,6 +82,7 @@ boutonTous.addEventListener("click", function () {
     genererProjets(projets);
 });
 
+//fonction des autres boutons filtre
 for (let i = 0; i < allFilters.length; i++) {
     const filter = allFilters[i];
     filter.addEventListener("click", function () {
@@ -95,7 +97,7 @@ for (let i = 0; i < allFilters.length; i++) {
     });
 };
 
-//On vérifie que le token bearer est présent
+//On vérifie que le token bearer est présent pour modifier les projets
 const tokenBearer = window.sessionStorage.getItem("token")
 if (tokenBearer !== null) {
     const modifierParent = document.createElement("a");
@@ -106,15 +108,14 @@ if (tokenBearer !== null) {
     modifierParent.innerHTML = '<i class="fa-regular fa-pen-to-square fa-sm" style="color: #000000;"></i>  modifier'
     const mesProjets = document.querySelector(".mes-projets")
     mesProjets.appendChild(modifierParent)
-
 };
 
+//pour afficher les projets dans la liste de projets de la modale
 const modalLink = document.querySelector(".modal-js")
 const modal = document.querySelector("#modal1")
 const mainWrapper = document.querySelector(".main-wrapper")
-const modalWrapper = document.querySelector(".modal-wrapper")
-const modalPhotosWrapper = document.createElement("div")
-modalPhotosWrapper.className = "modal-photos-wrapper"
+const modalPhotoListeWrapper = document.querySelector(".modal-liste-photo")
+const modalPhotosWrapper = document.querySelector(".modal-photos-wrapper")
 function modalAfficherProjets() {
     for (let i = 0; i < projets.length; i++) {
         const projet = projets[i]
@@ -135,27 +136,9 @@ function modalAfficherProjets() {
     }
 }
 
-const closeButton = document.createElement("button")
-closeButton.className = "js-modal-close"
-closeButton.innerHTML = '<i class="fa-solid fa-xmark fa-lg"></i>'
-const modalTitleGallery = document.createElement("h2")
-modalTitleGallery.innerText = "Galerie photo"
-modalWrapper.appendChild(closeButton)
-modalWrapper.appendChild(modalTitleGallery)
-modalWrapper.appendChild(modalPhotosWrapper)
-
 modalAfficherProjets()
-const line = document.createElement("hr")
-const buttonAjouterPhoto = document.createElement("button")
-buttonAjouterPhoto.innerText = "Ajouter une photo"
-buttonAjouterPhoto.className = "ajouter-photo"
-const supprimerGallerie = document.createElement("button")
-supprimerGallerie.innerText = "Supprimer la galerie"
-supprimerGallerie.className = "supp-galerie"
-modalWrapper.appendChild(line)
-modalWrapper.appendChild(buttonAjouterPhoto)
-modalWrapper.appendChild(supprimerGallerie)
 
+//fonction d'ouverture de la modale
 const openModal = function (e) {
     e.preventDefault()
     mainWrapper.setAttribute("aria-hidden", "true")
@@ -164,7 +147,7 @@ const openModal = function (e) {
     modal.setAttribute("aria-modal", "true");
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
 
-
+    //fonction pour supprimer un projet de la liste
     const deletebuttons = document.querySelectorAll(".delete-button")
     for (let i = 0; i < deletebuttons.length; i++) {
         const button = deletebuttons[i]
@@ -180,9 +163,9 @@ const openModal = function (e) {
             modalAfficherProjets();
         })
     }
-
 };
 
+//fonction de fermeture de modale
 const closeModal = function (e) {
     e.preventDefault()
     mainWrapper.setAttribute("aria-hidden", "false")
@@ -193,9 +176,105 @@ const closeModal = function (e) {
 }
 
 modalLink.addEventListener("click", openModal)
-
+//pour quitter la modale à l'aide d'esc pour l'accessibilité
 window.addEventListener("keydown", function (e) {
     if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
     }
+})
+
+//code de la deuxième modale
+const modalWrapperDeux = modal.querySelector(".modal-ajouter-photo")
+
+const returnWhenClose = function () {
+    modalPhotoListeWrapper.style.display = "block";
+    modalWrapperDeux.style.display = "none";
+    modal.querySelector(".js-modal-close2").removeEventListener("click", returnWhenClose)
+
+}
+
+//passage d'une modale à l'autre
+const returnButton = modal.querySelector(".js-modal-return")
+const openModalDeux = function () {
+    modalPhotoListeWrapper.style.display = "none";
+    modalWrapperDeux.style.display = "block";
+    modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
+    modal.querySelector(".js-modal-close2").addEventListener("click", closeModal)
+    modal.querySelector(".js-modal-close2").addEventListener("click", returnWhenClose)
+    returnButton.addEventListener("click", retourModalUne)
+
+}
+
+//fonction pour retourner à la première page de la modale
+const retourModalUne = function () {
+    modalPhotoListeWrapper.style.display = "block";
+    modalWrapperDeux.style.display = "none";
+    modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
+    modal.querySelector(".js-modal-close2").removeEventListener("click", closeModal)
+    returnButton.removeEventListener("click", retourModalUne)
+}
+
+//application de la fonction pour passer à la deuxième page de la modale
+const buttonAjouterPhoto = modal.querySelector(".ajouter-photo")
+buttonAjouterPhoto.addEventListener("click", openModalDeux)
+
+const inputFile = modal.querySelector("#file")
+const inputTitle = modal.querySelector("#title")
+const inputCategory = modal.querySelector("#category")
+
+//on joint le bouton ajouter photo à l'input file
+const buttonFileInput = modal.querySelector(".button-file-input")
+buttonFileInput.addEventListener("click", function () {
+    event.preventDefault
+    inputFile.click()
+})
+
+const previewImage = (event) => {
+    const blockInputFile = document.querySelector(".input-file-block")
+    const inputInfos = document.querySelector(".input-file-infos")
+    const imageFiles = event.target.files;
+    const imageSrc = URL.createObjectURL(imageFiles[0])
+    const imagePreviewElement = document.createElement("img")
+    imagePreviewElement.alt = "image sélectionnée"
+    imagePreviewElement.src = imageSrc
+    imagePreviewElement.className = "image-preview"
+    blockInputFile.appendChild(imagePreviewElement)
+    inputInfos.style.display = "none"
+}
+
+inputFile.addEventListener("change", previewImage)
+
+//fonction pour activer le boutton seulement si les champs du formulaire sont remplis
+const buttonValiderForm = modal.querySelector(".modal-valider-button")
+buttonValiderForm.disabled = true
+
+inputFile.addEventListener("input", updateButtonValider)
+inputTitle.addEventListener("input", updateButtonValider)
+inputCategory.addEventListener("input", updateButtonValider)
+
+function updateButtonValider() {
+    if (inputFile.files.length > 0 && inputTitle.value !== "" && inputCategory.value !== "null") {
+        buttonValiderForm.disabled = false
+    } else {
+        buttonValiderForm.disabled = true
+    }
+}
+
+//fonction pour ajouter un projet à la liste
+const formAjoutPhoto = modal.querySelector(".form-ajout-photo")
+formAjoutPhoto.addEventListener("submit", async function () {
+    event.preventDefault()
+
+    const projetInput = new FormData()
+    projetInput.append("image", modal.querySelector("#file").files[0]); // Assuming the file input has the id "file"
+    projetInput.append("title", modal.querySelector("#title").value);
+    projetInput.append("category", modal.querySelector("#category").value);
+
+    const reponsePostProjet = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${tokenBearer}`
+        },
+        body: projetInput
+    })
 })

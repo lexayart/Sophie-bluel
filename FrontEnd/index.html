@@ -9,6 +9,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/6ce280d577.js" crossorigin="anonymous"></script>
@@ -74,6 +75,48 @@
 	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
 		aria-labelledby="gallerie-photo" style="display: none;">
 		<div class="modal-wrapper">
+			<div class="modal-liste-photo ">
+				<button class="js-modal-close"><i class="fa-solid fa-xmark fa-lg"></i></button>
+				<h2>Galerie Photo</h2>
+				<div class="modal-photos-wrapper"></div>
+				<hr>
+				<button class="ajouter-photo">Ajouter une photo</button>
+				<button class="supp-galerie">Supprimer la galerie</button>
+			</div>
+			<div class="modal-ajouter-photo" style="display: none;">
+				<div class="buttons-haut">
+					<button class="js-modal-return"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
+					<button class="js-modal-return js-modal-close2"><i class="fa-solid fa-xmark fa-lg"></i></button>
+				</div>
+				<h2>Ajout photo</h2>
+				<form action="" class="form-ajout-photo">
+					<div class="input-file-block">
+						<div class="input-file-infos">
+							<img src="./assets/icons/image.svg" alt="prictograme d'une image" class="picto-img">
+							<span>
+								<button type="button" class="button-file-input">+ Ajouter photo</button>
+								<input type="file" name="file" id="file" accept="image/png, image/jpeg">
+							</span>
+							<p class="file-input-caption">jpg, png : 4mo max</p>
+						</div>
+					</div>
+					<div class="modal-form-group">
+						<label for="title" class="modal-label">Titre</label>
+						<input type="text" name="title" id="title" class="modal-form">
+					</div>
+					<div class="modal-form-group">
+						<label for="category" class="modal-label">Catégorie</label>
+						<select name="category" id="category" class="modal-form">
+							<option value=null> </option>
+							<option value=1>Objets</option>
+							<option value=2>Appartements</option>
+							<option value=3>Hotels & restaurants</option>
+						</select>
+					</div>
+					<hr>
+					<button class="modal-valider-button">Valider</button>
+				</form>
+			</div>
 		</div>
 	</aside>
 	<script type="module" src="works.js"></script>
