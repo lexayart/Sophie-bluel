@@ -135,6 +135,9 @@ table {
 }
 
 /** end reset css**/
+
+/** Général **/
+
 body {
 	max-width: 1140px;
 	margin: auto;
@@ -153,6 +156,8 @@ header {
 section {
 	margin: 50px 0
 }
+
+/** Header **/
 
 h1 {
 	display: flex;
@@ -198,6 +203,8 @@ nav li a:hover {
 	color: #B1663C;
 }
 
+/** Introduction **/
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -224,6 +231,8 @@ nav li a:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/** Portfolio **/
 
 #portfolio h2 {
 	text-align: center;
@@ -286,6 +295,8 @@ h2 .modifier-projets {
 	cursor: pointer;
 }
 
+/** Contact **/
+
 #contact {
 	width: 50%;
 	margin: auto;
@@ -340,8 +351,7 @@ footer nav ul {
 	margin: 2em
 }
 
-/* deuxième page de la modale */
-
+/** Modale **/
 
 .modal {
 	position: fixed;
@@ -475,7 +485,7 @@ hr {
 	display: block;
 }
 
-/* deuxième page de la modale */
+/* Modale 2e page */
 
 .buttons-haut {
 	display: flex;
@@ -507,7 +517,7 @@ hr {
 	justify-content: center
 }
 
-.input-file-infos{
+.input-file-infos {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -521,11 +531,11 @@ hr {
 	margin-bottom: 21px;
 }
 
-#file{
+#file {
 	display: none;
 }
 
-.button-file-input{
+.button-file-input {
 	width: 173px;
 	height: 36px;
 	background-color: #CBD6DC;
@@ -538,13 +548,13 @@ hr {
 	margin-bottom: 7px;
 }
 
-.file-input-caption{
+.file-input-caption {
 	font-size: 10px;
 	font-family: "Work Sans";
 	font-weight: 400;
 }
 
-.image-preview{
+.image-preview {
 	height: 100%;
 }
 
@@ -566,7 +576,9 @@ hr {
 }
 
 
-form input, form select, form option{
+form input,
+form select,
+form option {
 	font-family: "Work Sans";
 	font-weight: 400;
 	height: 51px;
@@ -574,7 +586,7 @@ form input, form select, form option{
 	padding-right: 15px;
 }
 
-form hr{
+form hr {
 	margin-top: 50px;
 }
 
@@ -585,7 +597,7 @@ form hr{
 	box-shadow: 0px 4px 14px 0px rgb(0, 0, 0, 0.09);
 }
 
-.modal-valider-button{
+.modal-valider-button {
 	width: 237px;
 	height: 36px;
 	border-radius: 60px;
@@ -598,11 +610,11 @@ form hr{
 	transition: 0.2s
 }
 
-.modal-valider-button:hover{
+.modal-valider-button:hover {
 	cursor: pointer;
 }
 
-.modal-valider-button:disabled{
+.modal-valider-button:disabled {
 	background-color: #A7A7A7;
 	cursor: default;
 	transition: 0.2s;
