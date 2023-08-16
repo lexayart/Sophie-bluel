@@ -5,10 +5,11 @@ const errorParent = document.querySelector(".error-message")
 //fonction pour login l'utilisateur
 formulaireLogin.addEventListener("submit", async function (event) {
     event.preventDefault();
-    //on met le mail et le mot de passe rentrés par l'utilisateur dans la charge utile qu'on va stringify pour l'envoyer à l'API
+    //on met le mail et le mot de passe rentrés par l'utilisateur 
+    //dans la charge utile qu'on va stringify pour l'envoyer à l'API
     const loginInput = {
-        email: (event.target.querySelector("[name=input-email").value),
-        password: (event.target.querySelector("[name=input-password").value)
+        email: (event.target.querySelector("[name=input-email]").value),
+        password: (event.target.querySelector("[name=input-password]").value)
     };
     const chargeUtile = JSON.stringify(loginInput);
     //On envoie le tout à l'API et on traite par la suite la réponse

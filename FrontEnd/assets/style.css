@@ -139,12 +139,54 @@ table {
 /** Général **/
 
 body {
-	max-width: 1140px;
-	margin: auto;
+	width: 100%;
 	font-family: 'Work Sans';
 	font-size: 14px;
 	background-color: #FFFEF8;
-	;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.main-wrapper{
+	max-width: 1140px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+
+.publish-changes{
+	display: none;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 100vw;
+	background-color: black;
+	height: 59px;
+}
+
+.publish-changes .fa-pen-to-square{
+	color: white;
+	margin-right: 11px;
+}
+
+.mode-edition{
+	color: white;
+	margin-right: 21px;
+}
+
+.publier-changements{
+	background-color: white;
+	height: 38px;
+	width: 216px;
+	border-radius: 60px;
+	border: none;
+	box-sizing: border-box;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	
 }
 
 header {

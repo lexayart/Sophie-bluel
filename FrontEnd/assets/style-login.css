@@ -10,6 +10,16 @@ a {
 
 /*Contenu de la page*/
 
+body{
+    max-width: 1140px;
+    width: 1140px;
+    margin: auto;
+}
+
+header{
+    width: 100%;
+}
+
 main {
     text-align: center;
 }
