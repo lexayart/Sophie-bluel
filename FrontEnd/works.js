@@ -282,8 +282,8 @@ formAjoutPhoto.addEventListener("submit", async function (event) {
         body: projetInput
     })
     const updateOnList = await fetch("http://localhost:5678/api/works");
-    let yihaw = await updateOnList.json();
-    const lastProjet = yihaw[yihaw.length - 1]
+    let updatedList = await updateOnList.json();
+    const lastProjet = updatedList[updatedList.length - 1]
 
     const nouveauProjet = {
         "imageUrl": lastProjet.imageUrl,
