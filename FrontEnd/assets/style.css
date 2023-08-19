@@ -148,7 +148,7 @@ body {
 	flex-direction: column;
 }
 
-.main-wrapper{
+.main-wrapper {
 	max-width: 1140px;
 	margin-right: auto;
 	margin-left: auto;
@@ -156,7 +156,7 @@ body {
 
 
 
-.publish-changes{
+.publish-changes {
 	display: none;
 	flex-direction: row;
 	justify-content: center;
@@ -167,17 +167,17 @@ body {
 	height: 59px;
 }
 
-.publish-changes .fa-pen-to-square{
+.publish-changes .fa-pen-to-square {
 	color: white;
 	margin-right: 11px;
 }
 
-.mode-edition{
+.mode-edition {
 	color: white;
 	margin-right: 21px;
 }
 
-.publier-changements{
+.publier-changements {
 	background-color: white;
 	height: 38px;
 	width: 216px;
@@ -186,7 +186,7 @@ body {
 	box-sizing: border-box;
 	font-family: 'Work Sans';
 	font-weight: 500;
-	
+
 }
 
 header {
@@ -597,6 +597,7 @@ hr {
 }
 
 .image-preview {
+	display: none;
 	height: 100%;
 }
 

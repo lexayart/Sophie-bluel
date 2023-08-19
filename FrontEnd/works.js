@@ -2,6 +2,7 @@
 const reponse = await fetch("http://localhost:5678/api/works");
 const projets = await reponse.json();
 
+
 //on récupère le parent dans le DOM
 const sectionGallery = document.querySelector(".gallery");
 
@@ -11,7 +12,7 @@ const nomsFiltersList = ["Tous", "Objets", "Appartements", "Hotels & restaurants
 function genererfilters() {
     const filtersList = document.createElement("div");
     filtersList.className = "filters";
-    for (const nomFilter of nomsFiltersList){
+    for (const nomFilter of nomsFiltersList) {
         const inputFilter = document.createElement("input")
         inputFilter.type = "button"
         if (nomFilter === "Tous") {
@@ -25,6 +26,7 @@ function genererfilters() {
         sectionGallery.appendChild(filtersList)
         filtersList.appendChild(inputFilter)
     }
+
 };
 
 genererfilters();
@@ -131,35 +133,36 @@ function modalAfficherProjets() {
         PhotoParent.appendChild(deleteButton)
         PhotoParent.appendChild(edit)
     }
-}
-
-modalAfficherProjets()
-
-//fonction d'ouverture de la modale
-const openModal = function (e) {
-    mainWrapper.setAttribute("aria-hidden", "true")
-    modal.style.display = null;
-    modal.setAttribute("aria-hidden", "false");
-    modal.setAttribute("aria-modal", "true");
-    document.querySelector(".js-modal-close").addEventListener("click", closeModal)
 
     //fonction pour supprimer un projet de la liste
     const deletebuttons = document.querySelectorAll(".delete-button")
     for (let i = 0; i < deletebuttons.length; i++) {
         const deletebutton = deletebuttons[i]
         deletebutton.addEventListener("click", async function () {
-            e.preventDefault()
+            event.preventDefault()
             const adresseid = projets[i].id;
             const adresse = "http://localhost:5678/api/works/" + adresseid
             await fetch(adresse, {
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${tokenBearer}` }
             })
+            projets.splice([i], 1)
             const modalPhotosWrapper = document.querySelector(".modal-photos-wrapper")
             modalPhotosWrapper.innerHTML = ""
-            modalAfficherProjets();
+            miseAJourProjets();
         })
     }
+}
+
+modalAfficherProjets()
+
+//fonction d'ouverture de la modale
+const openModal = function () {
+    mainWrapper.setAttribute("aria-hidden", "true")
+    modal.style.display = null;
+    modal.setAttribute("aria-hidden", "false");
+    modal.setAttribute("aria-modal", "true");
+    document.querySelector(".js-modal-close").addEventListener("click", closeModal)
 };
 
 //fonction de fermeture de modale
@@ -231,16 +234,14 @@ buttonFileInput.addEventListener("click", function (event) {
 })
 
 //Pour afficher un preview de la photo choisie
+const imagePreviewElement = document.querySelector(".image-preview")
+const inputInfos = document.querySelector(".input-file-infos")
 const previewImage = (event) => {
     const blockInputFile = document.querySelector(".input-file-block")
-    const inputInfos = document.querySelector(".input-file-infos")
     const imageFiles = event.target.files;
     const imageSrc = URL.createObjectURL(imageFiles[0])
-    const imagePreviewElement = document.createElement("img")
-    imagePreviewElement.alt = "image sélectionnée"
     imagePreviewElement.src = imageSrc
-    imagePreviewElement.className = "image-preview"
-    blockInputFile.appendChild(imagePreviewElement)
+    imagePreviewElement.style.display = "block"
     inputInfos.style.display = "none"
 }
 
@@ -264,29 +265,51 @@ function updateButtonValider() {
 }
 
 //fonction pour ajouter un projet à la liste
-const formAjoutPhoto = document.querySelector(".modal-valider-button")
-formAjoutPhoto.addEventListener("click", async function (event) {
+const formAjoutPhoto = document.getElementById("form-ajout-photo")
+formAjoutPhoto.addEventListener("submit", async function (event) {
+
     event.preventDefault();
-
     const projetInput = new FormData()
-    projetInput.append("image", document.querySelector("#file").files[0]);
-    projetInput.append("title", document.querySelector("#title").value);
-    projetInput.append("category", document.querySelector("#category").value);
+    projetInput.append("image", inputFile.files[0]);
+    projetInput.append("title", inputTitle.value);
+    projetInput.append("category", inputCategory.value);
 
-    const reponsePostProjet = await fetch("http://localhost:5678/api/works", {
+    await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
             Authorization: `Bearer ${tokenBearer}`
         },
         body: projetInput
     })
+    const updateOnList = await fetch("http://localhost:5678/api/works");
+    let yihaw = await updateOnList.json();
+    const lastProjet = yihaw[yihaw.length - 1]
+
+    const nouveauProjet = {
+        "imageUrl": lastProjet.imageUrl,
+        "title": lastProjet.title,
+        "category": lastProjet.category
+    }
+    projets.push(nouveauProjet)
+    console.log(projets)
     miseAJourProjets()
+    resetAjouterForm()
 })
+
+function resetAjouterForm() {
+    inputFile.length = 0
+    inputTitle.value = ""
+    inputCategory.value = "null"
+    imagePreviewElement.style.display = "none"
+    inputInfos.style.display = "flex"
+    buttonValiderForm.disabled = true
+    returnButton.click()
+}
 
 function miseAJourProjets() {
     modalPhotosWrapper.innerHTML = ""
-    modalAfficherProjets()
     projetsList.innerHTML = ""
+    modalAfficherProjets()
     genererProjets(projets)
 }
 
