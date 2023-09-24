@@ -1,9 +1,23 @@
-a{
+/*Barre de navigation*/
+
+a {
     text-decoration: none;
 }
 
 .active {
     font-weight: 600;
+}
+
+/*Contenu de la page*/
+
+body{
+    max-width: 1140px;
+    width: 1140px;
+    margin: auto;
+}
+
+header{
+    width: 100%;
 }
 
 main {
@@ -14,7 +28,7 @@ h2 {
     margin-bottom: 40px;
 }
 
-.error-message{
+.error-message {
     color: #B1663C;
     margin-bottom: 20px;
     font-weight: 600;
@@ -68,6 +82,7 @@ button {
     text-decoration: underline;
 }
 
+/*Footer*/
 footer {
     background-color: white;
     height: 60px;

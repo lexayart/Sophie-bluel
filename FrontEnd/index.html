@@ -16,13 +16,19 @@
 </head>
 
 <body>
+	<div class="publish-changes">
+		<i class="fa-regular fa-pen-to-square fa-sm style"></i>
+		<p class="mode-edition">Mode édition</p>
+		<button class="publier-changements">publier les changements</button>
+	</div>
 	<div class="main-wrapper">
+
 		<header>
 			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 			<nav>
 				<ul>
-					<li><a href="#">projets</a></li>
-					<li><a href="#">contact</a></li>
+					<li><a href="#portfolio">projets</a></li>
+					<li><a href="#contact">contact</a></li>
 					<li><a href="./login.html">login</a></li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
@@ -72,6 +78,7 @@
 			</nav>
 		</footer>
 	</div>
+	<!-- code HTML de la modale -->
 	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
 		aria-labelledby="gallerie-photo" style="display: none;">
 		<div class="modal-wrapper">
@@ -89,8 +96,9 @@
 					<button class="js-modal-return js-modal-close2"><i class="fa-solid fa-xmark fa-lg"></i></button>
 				</div>
 				<h2>Ajout photo</h2>
-				<form action="" class="form-ajout-photo">
+				<form id="form-ajout-photo" class="form-ajout-photo">
 					<div class="input-file-block">
+						<img src="" alt="image sélectionnée" class="image-preview">
 						<div class="input-file-infos">
 							<img src="./assets/icons/image.svg" alt="prictograme d'une image" class="picto-img">
 							<span>
@@ -114,7 +122,7 @@
 						</select>
 					</div>
 					<hr>
-					<button class="modal-valider-button">Valider</button>
+					<button class="modal-valider-button" type="submit">Valider</button>
 				</form>
 			</div>
 		</div>
